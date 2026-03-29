@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Document — TGM Group LLC</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Libraries loaded from CDN for GitHub Pages compatibility -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <div class="logo-mark">TGM</div>
+        <div class="logo-text">
+          <span class="logo-name">TGM Group LLC</span>
+          <span class="logo-sub">Hiring Portal</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <a href="index.html" class="btn-back">&larr; Back to Portal</a>
+
+    <div class="doc-header">
+      <h1 id="doc-title"></h1>
+      <p class="doc-meta" id="doc-meta"></p>
+    </div>
+
+    <!-- Document Content -->
+    <div class="doc-body" id="doc-content"></div>
+
+    <!-- Signature Section -->
+    <div class="sign-section">
+      <h2>Signatures</h2>
+      <div class="sig-grid">
+        <!-- Employer (pre-signed) -->
+        <div class="sig-block">
+          <label>Employer</label>
+          <div class="sig-presigned">
+            <div class="sig-text" id="employer-sig-text"></div>
+            <div class="sig-note">Pre-signed</div>
+          </div>
+          <div class="sig-name" id="employer-name"></div>
+          <div style="font-size:12px; color:#666;" id="employer-title"></div>
+          <div class="sig-date">Date: <input type="date" id="employer-date" readonly></div>
+        </div>
+
+        <!-- Employee (needs to sign) -->
+        <div class="sig-block">
+          <label>Employee — Sign Below</label>
+          <div class="sig-canvas-wrap">
+            <canvas id="sig-canvas"></canvas>
+            <div class="sig-placeholder" id="sig-placeholder">Draw your signature here</div>
+          </div>
+          <div class="sig-actions">
+            <button class="btn-clear" id="btn-clear-sig">Clear</button>
+          </div>
+          <div class="sig-name" id="employee-name"></div>
+          <div style="font-size:12px; color:#666;" id="employee-title"></div>
+          <div class="sig-date">Date: <input type="date" id="employee-date"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-area">
+      <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+        Sign &amp; Submit Document
+      </button>
+      <p style="font-size:12px; color:#666; margin-top:8px;">
+        A signed PDF will be generated and sent to TGM Group LLC
+      </p>
+    </div>
+  </main>
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-box">
+      <div class="check-circle">&#10003;</div>
+      <h3>Document Signed!</h3>
+      <p><strong id="success-doc-name"></strong> has been signed and submitted successfully.</p>
+      <p id="success-email-note" style="font-size:12px; color:#666;">A copy has been sent to tgmwashers@thetgmgroup.com</p>
+      <a href="index.html" class="btn-home">Back to Portal</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>TGM Group LLC &middot; tgmwashers@thetgmgroup.com &middot; tgmwashers.com &middot; Texas, USA</p>
+    </div>
+  </footer>
+
+  <script src="js/documents.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
