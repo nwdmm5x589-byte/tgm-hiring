@@ -1,17 +1,22 @@
-// ── Configuration ──
-// To enable email sending, create a free EmailJS account at https://www.emailjs.com
-// Then fill in these values:
-const EMAILJS_CONFIG = {
-  publicKey: '',      // Your EmailJS public key
-  serviceId: '',      // Your EmailJS service ID (connect Gmail)
-  templateId: '',     // Your EmailJS template ID
+// ── Google Drive Configuration ──
+// 1. Go to https://console.cloud.google.com
+// 2. Create a project (or use existing)
+// 3. Enable the "Google Drive API"
+// 4. Create OAuth 2.0 credentials (Web application type)
+//    - Add your GitHub Pages URL as an Authorized JavaScript origin
+//      (e.g. https://nwdmm5x589-byte.github.io)
+//    - Also add http://localhost:8090 for local testing
+// 5. Copy the Client ID below
+const GOOGLE_CONFIG = {
+  clientId: '',  // Your Google OAuth Client ID (ends in .apps.googleusercontent.com)
+  driveFolder: 'TGM Signed Documents',  // Folder name in Google Drive
 };
-
-const TGM_EMAIL = 'tgmwashers@thetgmgroup.com';
 
 // ── Initialize ──
 let signaturePad = null;
 let currentDoc = null;
+let googleTokenClient = null;
+let googleAccessToken = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -26,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderDocument();
   initSignaturePad();
   initDateFields();
+  initGoogleAuth();
 });
 
 function renderDocument() {
@@ -81,6 +87,99 @@ function initDateFields() {
   document.getElementById('employee-date').value = today;
 }
 
+// ── Google Auth ──
+function initGoogleAuth() {
+  if (!GOOGLE_CONFIG.clientId) return;
+
+  googleTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_CONFIG.clientId,
+    scope: 'https://www.googleapis.com/auth/drive.file',
+    callback: (response) => {
+      if (response.access_token) {
+        googleAccessToken = response.access_token;
+      }
+    },
+  });
+}
+
+async function ensureGoogleAuth() {
+  if (!GOOGLE_CONFIG.clientId) return false;
+
+  return new Promise((resolve) => {
+    if (googleAccessToken) {
+      resolve(true);
+      return;
+    }
+
+    googleTokenClient.callback = (response) => {
+      if (response.access_token) {
+        googleAccessToken = response.access_token;
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    };
+
+    googleTokenClient.requestAccessToken();
+  });
+}
+
+// ── Google Drive Upload ──
+async function getOrCreateFolder(folderName) {
+  // Check if folder exists
+  const searchRes = await fetch(
+    `https://www.googleapis.com/drive/v3/files?q=name='${encodeURIComponent(folderName)}'+and+mimeType='application/vnd.google-apps.folder'+and+trashed=false&fields=files(id,name)`,
+    { headers: { Authorization: `Bearer ${googleAccessToken}` } }
+  );
+  const searchData = await searchRes.json();
+
+  if (searchData.files && searchData.files.length > 0) {
+    return searchData.files[0].id;
+  }
+
+  // Create folder
+  const createRes = await fetch('https://www.googleapis.com/drive/v3/files', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${googleAccessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: folderName,
+      mimeType: 'application/vnd.google-apps.folder',
+    }),
+  });
+  const createData = await createRes.json();
+  return createData.id;
+}
+
+async function uploadToDrive(pdfBlob, fileName) {
+  const folderId = await getOrCreateFolder(GOOGLE_CONFIG.driveFolder);
+
+  // Use multipart upload
+  const metadata = {
+    name: fileName,
+    mimeType: 'application/pdf',
+    parents: [folderId],
+  };
+
+  const formData = new FormData();
+  formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+  formData.append('file', pdfBlob);
+
+  const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,webViewLink', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${googleAccessToken}` },
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error(`Drive upload failed: ${res.status}`);
+  }
+
+  return await res.json();
+}
+
 // ── PDF Generation ──
 async function generatePDF() {
   const { jsPDF } = window.jspdf;
@@ -109,12 +208,10 @@ async function generatePDF() {
   while (yOffset < imgH) {
     if (yOffset > 0) doc.addPage();
 
-    // Crop section of the image for this page
     const sourceY = (yOffset / imgH) * canvas.height;
     const sourceH = Math.min((availableH / imgH) * canvas.height, canvas.height - sourceY);
     const destH = Math.min(availableH, imgH - yOffset);
 
-    // Create a temporary canvas for this page slice
     const tempCanvas = document.createElement('canvas');
     tempCanvas.width = canvas.width;
     tempCanvas.height = sourceH;
@@ -205,46 +302,52 @@ async function handleSubmit() {
 
   const btn = document.getElementById('btn-submit');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Generating & Sending...';
+  btn.innerHTML = '<span class="spinner"></span> Generating & Saving...';
 
   try {
     const pdf = await generatePDF();
-    const pdfBase64 = pdf.output('datauristring').split(',')[1];
     const fileName = `${currentDoc.title.replace(/\s+/g, '_')}_Signed_${currentDoc.employeeName.replace(/\s+/g, '_')}.pdf`;
 
-    // Try EmailJS if configured
-    if (EMAILJS_CONFIG.publicKey && EMAILJS_CONFIG.serviceId && EMAILJS_CONFIG.templateId) {
-      await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
-        to_email: TGM_EMAIL,
-        from_name: currentDoc.employeeName,
-        document_name: currentDoc.title,
-        sign_date: document.getElementById('employee-date').value,
-        pdf_attachment: pdfBase64,
-        file_name: fileName,
-      });
-    } else {
-      // If EmailJS not configured, download the PDF instead
-      pdf.save(fileName);
+    // Try Google Drive if configured
+    if (GOOGLE_CONFIG.clientId) {
+      const authed = await ensureGoogleAuth();
+      if (authed) {
+        const pdfBlob = pdf.output('blob');
+        const driveFile = await uploadToDrive(pdfBlob, fileName);
+
+        // Mark as signed
+        localStorage.setItem('tgm-signed-' + currentDoc.id, new Date().toISOString());
+
+        // Show success
+        document.getElementById('success-overlay').classList.add('show');
+        document.getElementById('success-doc-name').textContent = currentDoc.title;
+
+        const driveNote = document.getElementById('success-drive-note');
+        if (driveFile.webViewLink) {
+          driveNote.innerHTML = `Saved to Google Drive: <a href="${driveFile.webViewLink}" target="_blank" style="color:var(--green);">View file</a>`;
+        } else {
+          driveNote.textContent = `Saved to "${GOOGLE_CONFIG.driveFolder}" in Google Drive`;
+        }
+        return;
+      }
     }
 
-    // Mark as signed in localStorage
-    localStorage.setItem('tgm-signed-' + currentDoc.id, new Date().toISOString());
+    // Fallback: download PDF locally
+    pdf.save(fileName);
 
-    // Show success
+    localStorage.setItem('tgm-signed-' + currentDoc.id, new Date().toISOString());
     document.getElementById('success-overlay').classList.add('show');
     document.getElementById('success-doc-name').textContent = currentDoc.title;
-
-    if (!EMAILJS_CONFIG.publicKey) {
-      document.getElementById('success-email-note').textContent =
-        'The signed PDF has been downloaded. Please email it to ' + TGM_EMAIL;
-    }
+    document.getElementById('success-drive-note').textContent =
+      'The signed PDF has been downloaded. Upload it to Google Drive manually.';
 
   } catch (err) {
     console.error('Submit error:', err);
-    alert('There was an error. The PDF has been downloaded instead. Please email it to ' + TGM_EMAIL);
+    alert('There was an error saving to Drive. The PDF will be downloaded instead.');
     try {
       const pdf = await generatePDF();
-      pdf.save(`${currentDoc.title.replace(/\s+/g, '_')}_Signed.pdf`);
+      const fileName = `${currentDoc.title.replace(/\s+/g, '_')}_Signed.pdf`;
+      pdf.save(fileName);
     } catch (e) {
       alert('Error generating PDF: ' + e.message);
     }

@@ -9,7 +9,8 @@
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
   <header class="header">
@@ -74,7 +75,7 @@
         Sign &amp; Submit Document
       </button>
       <p style="font-size:12px; color:#666; margin-top:8px;">
-        A signed PDF will be generated and sent to The TGM Group LLC
+        A signed PDF will be generated and saved to The TGM Group Google Drive
       </p>
     </div>
   </main>
@@ -85,7 +86,7 @@
       <div class="check-circle">&#10003;</div>
       <h3>Document Signed!</h3>
       <p><strong id="success-doc-name"></strong> has been signed and submitted successfully.</p>
-      <p id="success-email-note" style="font-size:12px; color:#666;">A copy has been sent to tgmwashers@thetgmgroup.com</p>
+      <p id="success-drive-note" style="font-size:12px; color:#666;">Saved to The TGM Group Google Drive</p>
       <a href="index.html" class="btn-home">Back to Portal</a>
     </div>
   </div>
