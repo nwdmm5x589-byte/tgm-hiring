@@ -41,4 +41,4 @@ Without Google Drive configured, signed PDFs are downloaded locally for manual u
 
 1. Go to repo Settings > Pages
 2. Set source to `main` branch, folder `/web`
-3. The portal will be live at `https://<username>.github.io/tgm-hiring/`
+3. The portal will be live at `https://<username>.github.io/tgm-hiring/web`
