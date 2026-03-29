@@ -8,7 +8,7 @@
 //    - Also add http://localhost:8090 for local testing
 // 5. Copy the Client ID below
 const GOOGLE_CONFIG = {
-  clientId: '',  // Your Google OAuth Client ID (ends in .apps.googleusercontent.com)
+  clientId: '291173102063-hgn2ies556ji1jksh1mmojo6c44h886v.apps.googleusercontent.com',
   driveFolder: 'TGM Signed Documents',  // Folder name in Google Drive
 };
 
