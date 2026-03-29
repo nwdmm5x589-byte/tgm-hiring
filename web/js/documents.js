@@ -1,19 +1,19 @@
 const DOCUMENTS = {
   'offer-letter': {
     title: 'Offer Letter',
-    subtitle: 'TGM Group LLC',
+    subtitle: 'The TGM Group LLC',
     date: 'May 1, 2025',
     employerName: 'Jovian Cabrera',
-    employerTitle: 'Founder & Owner, TGM Group LLC',
+    employerTitle: 'Founder & Owner, The TGM Group LLC',
     employeeName: 'Trinity Cabrera',
     employeeTitle: 'Field Technician',
     html: `
-      <p style="text-align:center;"><strong style="font-size:18px;">TGM GROUP LLC</strong><br>
+      <p style="text-align:center;"><strong style="font-size:18px;">THE TGM GROUP LLC</strong><br>
       <span style="color:#666;">tgmwashers@thetgmgroup.com | tgmwashers.com | Texas, USA</span></p>
       <p style="text-align:right;">May 1, 2025</p>
       <p><strong>Trinity Cabrera</strong><br>Texas, USA</p>
       <p><strong>Dear Trinity,</strong></p>
-      <p>On behalf of TGM Group LLC, it is my pleasure to formally offer you the position of <strong>Field Technician</strong>. Your dedication and hard work since the early days of this company have not gone unnoticed, and this offer reflects the value you bring to our operation.</p>
+      <p>On behalf of The TGM Group LLC, it is my pleasure to formally offer you the position of <strong>Field Technician</strong>. Your dedication and hard work since the early days of this company have not gone unnoticed, and this offer reflects the value you bring to our operation.</p>
       <p>Please review this letter and the accompanying Employment Agreement carefully. This offer is contingent upon completion of all pre-hire requirements by <strong>April 15, 2025</strong>. Acceptance of this offer constitutes your agreement to all terms outlined herein and in the Employment Agreement.</p>
 
       <h2>Position Details</h2>
@@ -55,7 +55,7 @@ const DOCUMENTS = {
       <ul>
         <li>Develop working knowledge of washer and dryer unit types in the TGM inventory</li>
         <li>Learn and practice disassembly, reassembly, and diagnostic procedures</li>
-        <li>Utilize training resources provided by TGM Group LLC and apply knowledge in the field</li>
+        <li>Utilize training resources provided by The TGM Group LLC and apply knowledge in the field</li>
       </ul>
 
       <h3>Advertising &amp; Community Outreach</h3>
@@ -89,25 +89,25 @@ const DOCUMENTS = {
 
       <h2>Next Steps</h2>
       <p>Please review this offer along with the accompanying Employment Agreement. Sign and return both documents by April 15, 2025, along with all pre-hire items listed above. If you have any questions, do not hesitate to reach out directly.</p>
-      <p>We are proud to formally welcome you to the TGM Group LLC team. Your role is essential to the growth of this company, and we look forward to building something great together.</p>
+      <p>We are proud to formally welcome you to The TGM Group LLC team. Your role is essential to the growth of this company, and we look forward to building something great together.</p>
       <p>Sincerely,</p>
     `
   },
 
   'employment-agreement': {
     title: 'Employment Agreement',
-    subtitle: 'TGM Group LLC',
+    subtitle: 'The TGM Group LLC',
     date: 'May 1, 2025',
     employerName: 'Jovian Cabrera',
-    employerTitle: 'Founder & Owner, TGM Group LLC',
+    employerTitle: 'Founder & Owner, The TGM Group LLC',
     employeeName: 'Trinity Cabrera',
     employeeTitle: 'Field Technician',
     html: `
-      <p style="text-align:center;"><strong style="font-size:18px;">TGM GROUP LLC</strong><br>
+      <p style="text-align:center;"><strong style="font-size:18px;">THE TGM GROUP LLC</strong><br>
       <span style="color:#666;">tgmwashers@thetgmgroup.com | tgmwashers.com | Texas, USA</span></p>
       <p style="text-align:center; font-size:16px; margin:1rem 0;"><strong>EMPLOYMENT AGREEMENT</strong></p>
       <p>This Employment Agreement ("Agreement") is entered into as of <strong>May 1, 2025</strong>, by and between:</p>
-      <p><strong>Employer:</strong> TGM Group LLC, a Texas Limited Liability Company<br>
+      <p><strong>Employer:</strong> The TGM Group LLC, a Texas Limited Liability Company<br>
       <strong>Employee:</strong> Trinity Cabrera</p>
       <p>Collectively referred to herein as the "Parties."</p>
 
@@ -128,7 +128,7 @@ const DOCUMENTS = {
       <h3>Equipment Training</h3>
       <ul>
         <li>Develop working knowledge of washer and dryer units in TGM inventory, including disassembly, reassembly, and diagnostics</li>
-        <li>Utilize training resources provided by TGM Group LLC to build and maintain technical proficiency</li>
+        <li>Utilize training resources provided by The TGM Group LLC to build and maintain technical proficiency</li>
       </ul>
 
       <h3>Advertising &amp; Community Outreach</h3>
@@ -165,16 +165,16 @@ const DOCUMENTS = {
       <h2>5. Benefits</h2>
       <ul>
         <li>Company vehicle provided for all work-related use. Personal use must be approved by Employer in advance.</li>
-        <li>Company phone provided for operational and customer communications. Device remains property of TGM Group LLC.</li>
+        <li>Company phone provided for operational and customer communications. Device remains property of The TGM Group LLC.</li>
         <li>Paid Time Off: Employee is granted 10 business days (2 weeks) of PTO upfront upon commencement of employment. PTO resets annually on the employment anniversary date.</li>
         <li>Training resources provided by Employer to support technical proficiency and professional development.</li>
       </ul>
 
       <h2>6. At-Will Employment</h2>
-      <p>Employment with TGM Group LLC is at-will. Either party may terminate this Agreement at any time, with or without cause, and with or without notice, subject to applicable Texas law. Nothing in this Agreement shall be construed as a guarantee of continued employment.</p>
+      <p>Employment with The TGM Group LLC is at-will. Either party may terminate this Agreement at any time, with or without cause, and with or without notice, subject to applicable Texas law. Nothing in this Agreement shall be construed as a guarantee of continued employment.</p>
 
       <h2>7. Confidentiality</h2>
-      <p>Employee acknowledges that during the course of employment, Employee will have access to confidential and proprietary information belonging to TGM Group LLC, including but not limited to:</p>
+      <p>Employee acknowledges that during the course of employment, Employee will have access to confidential and proprietary information belonging to The TGM Group LLC, including but not limited to:</p>
       <ul>
         <li>Customer lists, contact information, and account details</li>
         <li>Pricing structures, business strategies, and financial information</li>
@@ -187,13 +187,13 @@ const DOCUMENTS = {
       <p>During employment and for a period of twelve (12) months following the termination of employment, Employee agrees not to:</p>
       <ul>
         <li>Directly or indirectly engage in a washer and dryer rental business within the Houston metropolitan area (Harris County and contiguous counties: Fort Bend, Brazoria, Galveston, Chambers, Liberty, Montgomery, and Waller)</li>
-        <li>Solicit any customers of TGM Group LLC for a competing business</li>
-        <li>Solicit or recruit any employees or contractors of TGM Group LLC</li>
+        <li>Solicit any customers of The TGM Group LLC for a competing business</li>
+        <li>Solicit or recruit any employees or contractors of The TGM Group LLC</li>
       </ul>
       <p>The Parties acknowledge that this restriction is reasonable in scope, duration, and geography given the nature of the business and Employee's access to confidential information and customer relationships.</p>
 
       <h2>9. Company Property</h2>
-      <p>All equipment, tools, devices, vehicles, systems, and materials provided by TGM Group LLC remain the sole property of the Company. Upon termination of employment, Employee agrees to return all company property immediately and in good condition.</p>
+      <p>All equipment, tools, devices, vehicles, systems, and materials provided by The TGM Group LLC remain the sole property of the Company. Upon termination of employment, Employee agrees to return all company property immediately and in good condition.</p>
 
       <h2>10. Governing Law</h2>
       <p>This Agreement shall be governed by and construed in accordance with the laws of the State of Texas. Any disputes arising under this Agreement shall be resolved in the appropriate courts of Texas.</p>
@@ -207,14 +207,14 @@ const DOCUMENTS = {
 
   'prehire-checklist': {
     title: 'Pre-Hire Requirements Checklist',
-    subtitle: 'TGM Group LLC',
+    subtitle: 'The TGM Group LLC',
     date: 'May 1, 2025',
     employerName: 'Jovian Cabrera',
-    employerTitle: 'Founder & Owner, TGM Group LLC',
+    employerTitle: 'Founder & Owner, The TGM Group LLC',
     employeeName: 'Trinity Cabrera',
     employeeTitle: 'Field Technician',
     html: `
-      <p style="text-align:center;"><strong style="font-size:18px;">TGM GROUP LLC</strong><br>
+      <p style="text-align:center;"><strong style="font-size:18px;">THE TGM GROUP LLC</strong><br>
       <span style="color:#666;">tgmwashers@thetgmgroup.com | tgmwashers.com | Texas, USA</span></p>
       <p style="text-align:center; font-size:16px; margin:1rem 0;"><strong>PRE-HIRE REQUIREMENTS CHECKLIST</strong></p>
       <p><strong>Candidate:</strong> Trinity Cabrera<br>

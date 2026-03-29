@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderDocument() {
   document.getElementById('doc-title').textContent = currentDoc.title;
-  document.getElementById('doc-meta').textContent = `TGM Group LLC — ${currentDoc.date}`;
+  document.getElementById('doc-meta').textContent = `The TGM Group LLC — ${currentDoc.date}`;
   document.getElementById('doc-content').innerHTML = currentDoc.html;
   document.getElementById('employer-name').textContent = currentDoc.employerName;
   document.getElementById('employer-title').textContent = currentDoc.employerTitle;
   document.getElementById('employee-name').textContent = currentDoc.employeeName;
   document.getElementById('employee-title').textContent = currentDoc.employeeTitle;
   document.getElementById('employer-sig-text').textContent = currentDoc.employerName;
-  document.title = `Sign: ${currentDoc.title} — TGM Group LLC`;
+  document.title = `Sign: ${currentDoc.title} — The TGM Group LLC`;
 }
 
 function initSignaturePad() {
@@ -189,7 +189,7 @@ async function generatePDF() {
   y += 6;
   doc.setFontSize(8);
   doc.setTextColor(150);
-  doc.text('TGM Group LLC | tgmwashers@thetgmgroup.com | tgmwashers.com', margin, y);
+  doc.text('The TGM Group LLC | tgmwashers@thetgmgroup.com | tgmwashers.com', margin, y);
   y += 4;
   doc.text('Signed electronically via TGM Hiring Portal', margin, y);
 

@@ -1,6 +1,6 @@
-# TGM Group LLC — Hiring Portal
+# The TGM Group LLC — Hiring Portal
 
-E-signature hiring portal for TGM Group LLC employee onboarding.
+E-signature hiring portal for The TGM Group LLC employee onboarding.
 
 ## Structure
 
