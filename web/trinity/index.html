@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The TGM Group LLC - Hiring Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <div class="logo-mark">TGM</div>
+        <div class="logo-text">
+          <span class="logo-name">The TGM Group LLC</span>
+          <span class="logo-sub">tgmwashers@thetgmgroup.com</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Hiring Portal</h1>
+      <p class="hero-sub">Trinity Cabrera &mdash; Field Technician</p>
+    </div>
+
+    <section class="card-grid">
+      <a href="sign.html?doc=offer-letter" class="doc-card">
+        <div class="doc-icon">&#9993;</div>
+        <h3>Offer Letter</h3>
+        <p>Review and sign the formal offer of employment</p>
+        <span class="doc-action">Review &amp; Sign &rarr;</span>
+      </a>
+
+      <a href="sign.html?doc=employment-agreement" class="doc-card">
+        <div class="doc-icon">&#128196;</div>
+        <h3>Employment Agreement</h3>
+        <p>Review and sign the full employment agreement</p>
+        <span class="doc-action">Review &amp; Sign &rarr;</span>
+      </a>
+
+      <a href="sign.html?doc=prehire-checklist" class="doc-card">
+        <div class="doc-icon">&#9745;</div>
+        <h3>Pre-Hire Checklist</h3>
+        <p>Review and acknowledge all pre-hire requirements</p>
+        <span class="doc-action">Review &amp; Sign &rarr;</span>
+      </a>
+    </section>
+
+    <section class="info-bar">
+      <div class="info-item">
+        <strong>Start Date</strong>
+        <span>May 1, 2025</span>
+      </div>
+      <div class="info-item">
+        <strong>Pre-Hire Deadline</strong>
+        <span>April 15, 2025</span>
+      </div>
+      <div class="info-item">
+        <strong>Position</strong>
+        <span>Field Technician (Full-Time)</span>
+      </div>
+      <div class="info-item">
+        <strong>Starting Salary</strong>
+        <span>$2,500/mo</span>
+      </div>
+    </section>
+
+    <section class="status-section">
+      <h2>Document Status</h2>
+      <div class="status-table">
+        <div class="status-row" id="status-offer-letter">
+          <span class="status-name">Offer Letter</span>
+          <span class="status-badge pending">Pending Signature</span>
+        </div>
+        <div class="status-row" id="status-employment-agreement">
+          <span class="status-name">Employment Agreement</span>
+          <span class="status-badge pending">Pending Signature</span>
+        </div>
+        <div class="status-row" id="status-prehire-checklist">
+          <span class="status-name">Pre-Hire Checklist</span>
+          <span class="status-badge pending">Pending Signature</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>The TGM Group LLC &middot; tgmwashers@thetgmgroup.com &middot; tgmwashers.com &middot; Texas, USA</p>
+    </div>
+  </footer>
+
+  <script>
+    // Check localStorage for signed status (namespaced by employee)
+    ['offer-letter', 'employment-agreement', 'prehire-checklist'].forEach(doc => {
+      if (localStorage.getItem('tgm-signed-trinity-cabrera-' + doc)) {
+        const row = document.getElementById('status-' + doc);
+        if (row) {
+          const badge = row.querySelector('.status-badge');
+          badge.className = 'status-badge signed';
+          badge.textContent = 'Signed & Sent';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

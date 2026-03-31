@@ -364,3 +364,33 @@ body {
   margin-right: 6px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========= Checklist Uploads ========= */
+.checklist-upload { margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.checklist-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.checklist-upload-btn:hover { background: #163d5e; }
+.checklist-upload-info {
+  font-size: 12px;
+  color: var(--text-secondary);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.checklist-upload-info.uploaded { color: #2e7d32; font-weight: 600; }
+.checklist-upload-info.uploading { color: #e65100; }
+.checklist-upload-info.error { color: #c62828; }
+.check-icon { font-size: 18px; }
+.check-icon.uploaded { color: #2e7d32; }
